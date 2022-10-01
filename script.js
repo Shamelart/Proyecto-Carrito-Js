@@ -1,26 +1,57 @@
-const Clickbutton = document.querySelectorAll('.button');
 const tbody = document.querySelector('.tbody');
 let carrito = [];
 
-Clickbutton.forEach(btn =>{
-    btn.addEventListener ('click', addToCarritoItem);
-}); 
-
-function addToCarritoItem(e){
-    const button = e.target;
-    const item = button.closest('.card');
-    const itemTitle = item.querySelector('.card-title').textContent;
-    const itemPrice = item.querySelector('.precio').textContent;
-    const itemImg = item.querySelector('.card-img-top').src;
-    
-    const newItem = {
-        title: itemTitle,
-        precio: itemPrice,
-        img: itemImg,
-        cantidad: 1
+window.onload = function(){
+    const storage = JSON.parse(localStorage.getItem('carrito'));
+    if (storage){
+        carrito = storage;
+        renderCarrito();
     }
+    builCard(products);
+    EventoClick();
+}
 
-    addItemCarrito(newItem);
+function EventoClick()
+{
+    let Clickbutton = document.querySelectorAll('.btn');
+    Clickbutton.forEach(btn =>{
+        btn.addEventListener ('click', addToCarritoItem);
+    });
+}
+const products = [
+    {name: 'Picada Mediterranea', price: 1700, img: './imagenes/picadaMediterranea.jpg', description:''},
+    {name: 'Picada Orejano', price: 2500, img: './imagenes/picadaOrejano.webp', description:''},
+    {name: 'Picada Patagonia', price: 2000, img: './imagenes/picadaPatagonia.webp', description:''},
+]
+
+const productContainer = document.querySelector('.productContainer');
+
+function builCard (productsArray){
+    productsArray.forEach(product =>{
+        const card = document.createElement('div');
+        card.classList.add('col');
+        card.classList.add('d-flex');
+        card.classList.add('justify-content-center');
+        card.classList.add('mb-4');
+        card.innerHTML = `
+            <div class="card shadow mb-1 bg-dark rounded" style="width: 20rem;">
+                <h5 class="card-title pt-2 text-center text-primary">${product.name}</h5>
+                <img src=${product.img} class="card-img-top" alt="">
+                <div class="body">
+
+                    <p class="card-text text-white-50 description">${product.description}</p>
+                    <h5 class="text-primary">precio: <span class="precio">$${product.price}</span></h5>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary button">Anadir a carrito</button>
+                    </div>
+                </div>
+            </div>
+        
+    `;
+
+    productContainer.append(card);
+    });
+
 }
 
 function addItemCarrito(newItem){
@@ -55,7 +86,7 @@ function renderCarrito(){
     tbody.innerHTML = ''
     carrito.map(item =>{
         const tr = document.createElement('tr');
-        tr.classList.add('ItemCarrito');
+        tr.classList.add('itemCarrito');
         const content = `
         <th scope="row">1</th>
                 <td class="table__productos">
@@ -92,7 +123,7 @@ function carritoTotal(){
 
 function removeItemCarrito(e){
     const buttonDelete = e.target;
-    const tr = buttonDelete.closest(".ItemCarrito");
+    const tr = buttonDelete.closest(".itemCarrito");
     const title = tr.querySelector('.title').textContent;
     for (let i = 0; i<carrito.length; i++){
        
@@ -105,7 +136,7 @@ function removeItemCarrito(e){
 } 
 function sumaCantidad(e){
     const sumaInput = e.target;
-    const tr = sumaInput.closest(".ItemCarrito");
+    const tr = sumaInput.closest(".itemCarrito");
     const title = tr.querySelector('.title').textContent;
     carrito.forEach(item =>{
         if (item.title() === title){
@@ -121,10 +152,20 @@ function addLocalStorage (){
     localStorage.setItem('carrito', JSON.stringify(carrito));
 }
 
-window.onload = function(){
-    const storage = JSON.parse(localStorage.getItem('carrito'));
-    if (storage){
-        carrito = storage;
-        renderCarrito();
+function addToCarritoItem(e){
+    const button = e.target;
+    const item = button.closest('.card');
+    const itemTitle = item.querySelector('.card-title').textContent;
+    const itemPrice = item.querySelector('.precio').textContent;
+    const itemImg = item.querySelector('.card-img-top').src;
+
+  
+    const newItem = {
+        title: itemTitle,
+        precio: itemPrice,
+        img: itemImg,
+        cantidad: 1
     }
+
+    addItemCarrito(newItem);
 }

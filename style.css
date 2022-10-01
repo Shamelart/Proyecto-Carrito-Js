@@ -43,3 +43,6 @@ header{
     margin-right: 30px;
     margin-bottom: 20px;
 }
+.card-img-top{
+    height: 175px;
+}
