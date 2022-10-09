@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Picada Mediterranea",
+        "price": 1700,
+        "img": "./imagenes/picadaMediterranea.jpg",
+        "description": ""
+    },
+    {
+        "name": "Picada Orejano",
+        "price": 2500,
+        "img": "./imagenes/picadaOrejano.webp",
+        "description": ""
+    },
+    {
+        "name": "Picada Patagonia",
+        "price": 2000,
+        "img": "../imagenes/picadaPatagonia.webp",
+        "description": ""
+    }
+]

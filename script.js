@@ -6,27 +6,25 @@ window.onload = function () {
     if (storage) {
         carrito = storage;
         renderCarrito();
-    }
-    builCard(products);
+    }    
     eventoClick();
 }
-
-function eventoClick() {
+const eventoClick = async () => {
+    
+    const infoProductos = await fetch('/productos.json');
+    const infoProductosJson = await infoProductos.json();
+    builCard(infoProductosJson);
     let clickbutton = document.querySelectorAll('.button');
     clickbutton.forEach(btn => {
         btn.addEventListener('click', addToCarritoItem);
     });
 }
-const products = [
-    { name: 'Picada Mediterranea', price: 1700, img: './imagenes/picadaMediterranea.jpg', description: '' },
-    { name: 'Picada Orejano', price: 2500, img: './imagenes/picadaOrejano.webp', description: '' },
-    { name: 'Picada Patagonia', price: 2000, img: './imagenes/picadaPatagonia.webp', description: '' },
-]
+
 
 const productContainer = document.querySelector('.productContainer');
 
 function builCard(productsArray) {
-    productsArray.forEach(product => {
+    productsArray.forEach((element) => {
         const card = document.createElement('div');
         card.classList.add('col');
         card.classList.add('d-flex');
@@ -34,12 +32,12 @@ function builCard(productsArray) {
         card.classList.add('mb-4');
         card.innerHTML = `
             <div class="card shadow mb-1 bg-dark rounded" style="width: 20rem;">
-                <h5 class="card-title pt-2 text-center text-primary">${product.name}</h5>
-                <img src=${product.img} class="card-img-top" alt="">
+                <h5 class="card-title pt-2 text-center text-primary">${element.name}</h5>
+                <img src=${element.img} class="card-img-top" alt="">
                 <div class="body">
 
-                    <p class="card-text text-white-50 description">${product.description}</p>
-                    <h5 class="text-primary">precio: <span class="precio">$${product.price}</span></h5>
+                    <p class="card-text text-white-50 description">${element.description}</p>
+                    <h5 class="text-primary">precio: <span class="precio">$${element.price}</span></h5>
                     <div class="d-grid gap-2">
                         <button class="btn btn-primary button">Anadir a carrito</button>
                     </div>
