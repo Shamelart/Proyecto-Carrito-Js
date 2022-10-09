@@ -1,8 +1,7 @@
 const tbody = document.querySelector('.tbody');
 let carrito = [];
-let productos = [];
+
 window.onload = function () {
-    loadJSON();
     const storage = JSON.parse(localStorage.getItem('carrito'));
     if (storage) {
         carrito = storage;
@@ -10,26 +9,14 @@ window.onload = function () {
     }    
     eventoClick();
 }
-async function loadJSON () {
-    const res = await fetch("/productos.json");
-    await res.json()
-    .then(data => {
-        productos.push(data);
-    })
-    .then(builCard(productos));
-   
-  }
 const eventoClick = async () => {
-    let clickbutton = document.querySelectorAll('.button');
-
+    
     const infoProductos = await fetch('/productos.json');
     const infoProductosJson = await infoProductos.json();
-
-    const builCard = infoProductosJson.results;
-    builCard;
+    builCard(infoProductosJson);
+    let clickbutton = document.querySelectorAll('.button');
     clickbutton.forEach(btn => {
         btn.addEventListener('click', addToCarritoItem);
-
     });
 }
 
@@ -49,7 +36,7 @@ function builCard(productsArray) {
                 <img src=${element.img} class="card-img-top" alt="">
                 <div class="body">
 
-                    <p class="card-text text-white-50 description">${product.description}</p>
+                    <p class="card-text text-white-50 description">${element.description}</p>
                     <h5 class="text-primary">precio: <span class="precio">$${element.price}</span></h5>
                     <div class="d-grid gap-2">
                         <button class="btn btn-primary button">Anadir a carrito</button>
