@@ -6,11 +6,14 @@ window.onload = function () {
     if (storage) {
         carrito = storage;
         renderCarrito();
-    }    
+    }
     eventoClick();
-}
-const eventoClick = async () => {
     
+}
+//Uso de fetch
+
+const eventoClick = async () => {
+
     const infoProductos = await fetch('/productos.json');
     const infoProductosJson = await infoProductos.json();
     builCard(infoProductosJson);
@@ -20,6 +23,7 @@ const eventoClick = async () => {
     });
 }
 
+//generando card
 
 const productContainer = document.querySelector('.productContainer');
 
@@ -30,16 +34,17 @@ function builCard(productsArray) {
         card.classList.add('d-flex');
         card.classList.add('justify-content-center');
         card.classList.add('mb-4');
+        card.classList.add('my-5');
         card.innerHTML = `
-            <div class="card shadow mb-1 bg-dark rounded" style="width: 20rem;">
-                <h5 class="card-title pt-2 text-center text-primary">${element.name}</h5>
+            <div class="card shadow mb-2 rounded" style="width: 20rem;">
+                <h5 class="card-title pt-2 text-center text-white">${element.name}</h5>
                 <img src=${element.img} class="card-img-top" alt="">
                 <div class="body">
 
-                    <p class="card-text text-white-50 description">${element.description}</p>
-                    <h5 class="text-primary">precio: <span class="precio">$${element.price}</span></h5>
+                    <p class="card-text text-center text-white description">${element.description}</p>
+                    <h5 class="text-light text-center"> <span class="precio">$${element.price}</span></h5>
                     <div class="d-grid gap-2">
-                        <button class="btn btn-primary button">Anadir a carrito</button>
+                        <button class="btn btn-dark button">Anadir a carrito</button>
                     </div>
                 </div>
             </div>
@@ -48,7 +53,6 @@ function builCard(productsArray) {
 
         productContainer.append(card);
     });
-
 }
 
 function addItemCarrito(newItem) {
@@ -88,9 +92,9 @@ function renderCarrito() {
         <th scope="row">1</th>
                 <td class="table__productos">
                 <img src=${item.img} alt="">
-                <h6 class="title">${item.title}</h6>
+                <h6 class="title text-light ">${item.title}</h6>
                 </td>
-                <td class="table__price">${item.precio}</td>
+                <td class="table__price text-light">${item.precio}</td>
                 <td class="table__cantidad">
                 <input type="number" min="1" value=${item.cantidad} class="input__elemento">
                 <button class="delete btn btn-danger">Borrar</button>  
@@ -100,8 +104,22 @@ function renderCarrito() {
         tbody.append(tr);
 
         tr.querySelector(".delete").addEventListener('click', removeItemCarrito);
-        tr.querySelector(".input__elemento").addEventListener('change', sumaCantidad);
+        tr.querySelector(".input__elemento").addEventListener('onkeyup', cambiarValor);
+        tr.querySelector(".input__elemento").addEventListener('input', cambiarValor);
     })
+    carritoTotal();
+}
+
+function cambiarValor(e){
+    const input = e.target;
+    const tr = input.closest(".itemCarrito");
+    const title = tr.querySelector('.title').textContent;
+    for (let i = 0; i < carrito.length; i++) {
+
+        if (carrito[i].title.trim() === title.trim()) {
+            carrito[i].cantidad = input.valueAsNumber;
+        }
+    }
     carritoTotal();
 }
 
@@ -118,6 +136,22 @@ function carritoTotal() {
 
 }
 
+const comprar = document.querySelector('.btn-success');
+comprar.addEventListener('click', ()=>{
+    
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: '¡Gracias por su Compra!',
+        showConfirmButton: false,
+        timer: 1500
+    });
+    localStorage.clear();
+    tbody.innerHTML = '';
+    const itemCartTotal = document.querySelector('.itemCartTotal');
+    itemCartTotal.innerHTML = '';    
+});
+
 function removeItemCarrito(e) {
     const buttonDelete = e.target;
     const tr = buttonDelete.closest(".itemCarrito");
@@ -128,9 +162,11 @@ function removeItemCarrito(e) {
             carrito.splice(i, 1);
         }
     }
-    tr.remove();
-    carritoTotal();
+    tr.remove();    
 }
+
+
+
 function sumaCantidad(e) {
     const sumaInput = e.target;
     const tr = sumaInput.closest(".itemCarrito");
@@ -142,7 +178,6 @@ function sumaCantidad(e) {
             carritoTotal();
         }
     });
-
 }
 
 function addLocalStorage() {
@@ -166,3 +201,5 @@ function addToCarritoItem(e) {
 
     addItemCarrito(newItem);
 }
+
+

@@ -3,55 +3,123 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    transition: 2s;
+}
+.nav-link{
+    padding: 0.5em 1.5em;
+}
+.nav-pills .nav-link {  
+    background-color: #ea933bb5;
+    border-radius: 0;
+}
+.nav-pills .nav-link:hover { 
+background-color: #ea923b;
 }
 html{
     background-image: url(/imagenes/fondoMadera.png);
 }
-
-header .logo img {
-    background-color: rgba(1, 1, 1, 0.4);
-    
-    width: 250px;
-    height: 150px;
-    padding: 20px;
-
+main{
+    min-height: 500px;
 }
-li a:hover{
+body{
+    background-color: transparent;
+}
+.imgLogo img{
+    background-color: rgba(203, 128, 89, 0.);
+    width: 250px;
+    padding: 1em;
+    margin-left: 3em;
+}
+header{
+    background-color: #ac05059e;
+    display: flex;
+    justify-content: space-between;
+}
+.menu{
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    margin-right: 2em;
+    align-items: center;
+    border-radius: 0;
+}
+.menu ul li a:hover{
     background: #ef8354;
+    color: white;
 }
-.imgOrejano img{
-    width: 250px;
-    margin: 100px;
+ul{
+    border-radius: 2px;
+}
+.nav-item a{
+    color: white
 }
 
-
-
-
-
+.img{
+    background: url("/imagenes/portada.png");
+    margin: auto;
+    width: 950px;
+    height: 400px;
+    background-size: cover;
+}
+#pills-home h1{
+    text-align: center;
+    color: #f38c23;
+}
+#pills-home{
+    margin: 4em;
+}
+.tbody{
+    background-color: rgba(203, 117, 89, 0.622);
+}
+.itemCarrito{
+    color: white;
+}
+.encabezado{
+    background-color: rgba(203, 128, 89, 0.622);
+}
 .decription{
     height: 25px;
     overflow: hidden;
     transition: height .3s ease-in .3s;
 }
+.btn{
+    font-size: 20px;
+    background-color:  #f38c23;
+    border-color: whitesmoke;
+}
+.btn-success{
+    margin-bottom: 50px;
+}
+.input__elemento{
+    text-align: center;
+}
+
+.precio{
+    font-size: 18px;
+}
+
 
 .decription:hover{
     height: 80px;
 }
-
 .carrito{
     min-height: 80vh;
     max-width: 1000px;
     margin: 0 auto;
     width: 100%;
 }
-
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+    background-color: #f68413;
+    color: white
+}
+.nav-pills .nav-link.active:hover, .nav-pills .show>.nav-link:hover{
+    color: white;
+}
 .table__productos{
     display: flex;
 }
 
 .table__productos > img{
-    width: 9rem;
+    width: 9rem;        
     object-fit: contain;
     border-radius: 6px;
     margin-right: 20xp;
@@ -66,17 +134,37 @@ li a:hover{
     margin-right: 30px;
     margin-bottom: 20px;
 }
+.btn{
+    border:0;
+}
 .card-img-top{
     height: 175px;
+    width: 90%;
+    border: 0;
+}
+.card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    background-color: #ac05059e;;
 }
 footer{
     display: flex;
-    padding-top: 7px;
-    padding-bottom: 7px;
+    padding-top: 3px;
+    padding-bottom: 3px;
     justify-content: space-evenly;
     justify-items:center;
     text-align: center;
     font-size: 20px;
     color: white;
-    background-color: rgba(1, 1, 1, 0.9);
+    background-color: rgba(172, 5, 5,0.9);
+}
+.redes{
+    display: flex;
+    justify-content: space-evenly;
+}
+.redes a{
+    color:white;
+    
 }

@@ -3,18 +3,18 @@
         "name": "Picada Mediterranea",
         "price": 1700,
         "img": "./imagenes/picadaMediterranea.jpg",
-        "description": ""
+        "description": "Queso Tipo Gouda, Salamin Picado Fino, Salamin Picado Grueso, Jamon Natural y aceitunas verdes"
     },
     {
         "name": "Picada Orejano",
         "price": 2500,
         "img": "./imagenes/picadaOrejano.webp",
-        "description": ""
+        "description": "Queso Pategras, Queso Fynbo, Jamon Crudo, Jamon Natural, Bondiola, Salamin y aceitunas verdes"
     },
     {
         "name": "Picada Patagonia",
         "price": 2000,
         "img": "../imagenes/picadaPatagonia.webp",
-        "description": ""
+        "description": "Queso Azul, Queso Pategras, Queso Camberberg, Queso Gouda saborizado y Frutas"
     }
 ]
