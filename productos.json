@@ -14,7 +14,7 @@
     {
         "name": "Picada Patagonia",
         "price": 2000,
-        "img": "../imagenes/picadaPatagonia.webp",
+        "img": "./imagenes/picadaPatagonia.webp",
         "description": "Queso Azul, Queso Pategras, Queso Camberberg, Queso Gouda saborizado y Frutas"
     }
 ]
