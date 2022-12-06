@@ -15,10 +15,10 @@
 background-color: #ea923b;
 }
 html{
-    background-image: url(/imagenes/fondoMadera.png);
+    background-image: url(imagenes/fondoMadera.png);
 }
 main{
-    min-height: 500px;
+    min-height: 75vh;
 }
 body{
     background-color: transparent;
@@ -54,7 +54,7 @@ ul{
 }
 
 .img{
-    background: url("/imagenes/portada.png");
+    background: url("imagenes/portada.png");
     margin: auto;
     width: 950px;
     height: 400px;

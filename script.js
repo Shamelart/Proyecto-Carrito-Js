@@ -14,7 +14,7 @@ window.onload = function () {
 
 const eventoClick = async () => {
 
-    const infoProductos = await fetch('/productos.json');
+    const infoProductos = await fetch('productos.json');
     const infoProductosJson = await infoProductos.json();
     builCard(infoProductosJson);
     let clickbutton = document.querySelectorAll('.button');
